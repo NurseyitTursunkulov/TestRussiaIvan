@@ -63,4 +63,8 @@
         <item name="android:textColorPrimary">@color/actionbar_title_text</item>
     </style>
 
+    <style name="InputTextHintStyle" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

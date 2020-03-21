@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03DAC5</color>
+    <color name="colorPrimary">#B6B6B6</color>
     <color name="colorPrimaryDark">#1A4C646F</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
-    <color name="test">#9A0909</color>
+    <color name="test">#0F333333</color>
     <color name="colorTitle">#333333</color>
     <color name="toolbar_title_color">#333333</color>
     <color name="actionbar_title_text">#121111</color>
+    <color name="hint_text_color">#8A000000</color>
 </resources>

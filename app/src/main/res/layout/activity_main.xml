@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            android:elevation="4dp"
+            android:layout_marginBottom="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -28,11 +27,12 @@
                 android:background="@android:color/white"
                 android:minHeight="?attr/actionBarSize"
                 app:navigationIcon="@drawable/ic_back"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:theme="@style/ThemeOverlay.MyApp.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                style="@style/Widget.MyApp.Toolbar.Solid"
                 app:titleTextAppearance="@style/Toolbar.TitleText" />
 
         </com.google.android.material.appbar.AppBarLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <include layout="@layout/content_main" />

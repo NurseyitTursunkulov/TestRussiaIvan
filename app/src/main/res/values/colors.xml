@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#1A4C646F</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
-    <color name="test">#0F333333</color>
+    <color name="input_text_background">#0F333333</color>
     <color name="colorTitle">#333333</color>
     <color name="toolbar_title_color">#333333</color>
     <color name="actionbar_title_text">#121111</color>

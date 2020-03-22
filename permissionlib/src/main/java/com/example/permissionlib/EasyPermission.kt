@@ -56,33 +56,3 @@ fun checkPermission(
     }
 }
 
-fun onRequestPermissionsResult(
-    requestCodeFromSystem: Int,
-    grantResults: IntArray,
-    requestCode : Int,
-    onGranted: () -> Unit) {
-    when (requestCodeFromSystem) {
-        requestCode -> {
-            // If request is cancelled, the result arrays are empty.
-            if ((grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)) {
-                // permission was granted, yay! Do the
-                // contacts-related task you need to do.
-                android.util.Log.d("Nurs", "onRequestPermissionsResult")
-                onGranted()
-            } else {
-                // permission denied, boo! Disable the
-                // functionality that depends on this permission.
-                android.util.Log.d("Nurs", "onRequestPermissionsResult else ")
-
-            }
-            return
-        }
-
-        // Add other 'when' lines to check for other
-        // permissions this app might request.
-        else -> {
-            // Ignore all other requests.
-            Log.d("Nurs","else checkOnRequestPermissionsResult")
-        }
-    }
-}

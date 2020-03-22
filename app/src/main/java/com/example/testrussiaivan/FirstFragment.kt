@@ -2,10 +2,8 @@ package com.example.testrussiaivan
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +11,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
-import com.example.permissionlib.onRequestPermissionsResult
 import kotlinx.android.synthetic.main.fragment_first.*
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
     override fun onCreateView(
@@ -36,7 +30,7 @@ class FirstFragment : Fragment() {
         view.findViewById<Button>(R.id.save_btn).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        plus_icon.setOnClickListener {
+        add_avatar_imageview.setOnClickListener {
 //                        checkCameraPermission { dispatchTakePictureIntent() }
             checkPickImagePermission{
                 dispatchGetPictureFromGallery()

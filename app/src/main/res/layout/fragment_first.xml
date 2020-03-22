@@ -151,4 +151,16 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/outlinedButton"
         app:layout_constraintEnd_toStartOf="@+id/outlinedButton" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:textSize="16sp"
+        android:textColor="@color/sex_tv_color"
+        android:text="Пол"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

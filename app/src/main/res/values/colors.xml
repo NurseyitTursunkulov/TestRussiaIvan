@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#1A4C646F</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
+    <color name="sex_tv_color">#8A000000</color>
     <color name="red">#FF473D</color>
     <color name="input_text_background">#0F333333</color>
     <color name="colorTitle">#333333</color>

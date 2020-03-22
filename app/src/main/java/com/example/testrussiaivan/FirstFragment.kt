@@ -2,9 +2,10 @@ package com.example.testrussiaivan
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
-import com.example.permissionlib.checkPermission
 import com.example.permissionlib.onRequestPermissionsResult
 import kotlinx.android.synthetic.main.fragment_first.*
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -36,7 +37,11 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         plus_icon.setOnClickListener {
-            checkCameraPermission { dispatchTakePictureIntent() }
+//                        checkCameraPermission { dispatchTakePictureIntent() }
+            checkPickImagePermission{
+                dispatchGetPictureFromGallery()
+            }
+
         }
     }
 
@@ -45,19 +50,26 @@ class FirstFragment : Fragment() {
             permissions: Array<String>,
             grantResults: IntArray
     ) {
-        onRequestPermissionsResult(
-                requestCodeFromSystem = requestCode,
-                grantResults = grantResults,
-                requestCode = MY_PERMISSIONS_REQUEST_ACCESS_CAMERA,
-                onGranted = {
+        if (isPermissionGranted(grantResults)) {
+            when (requestCode) {
+                MY_PERMISSIONS_REQUEST_ACCESS_CAMERA -> {
                     dispatchTakePictureIntent()
-                })
+                }
+                MY_PERMISSIONS_REQUEST_ACCESS_GALLERY -> {
+                        dispatchGetPictureFromGallery()
+                }
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             image_view_avatar.setImageBitmap(imageBitmap)
+        }
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            val imageUri = data?.data;
+            image_view_avatar.setImageURI(imageUri);
         }
     }
 }

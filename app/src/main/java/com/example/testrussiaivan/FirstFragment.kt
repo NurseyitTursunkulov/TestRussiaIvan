@@ -6,6 +6,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.example.uploadPhoto.ImageResourceChooserDialogFragment
 import kotlinx.android.synthetic.main.fragment_first.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -22,22 +24,26 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         add_avatar_imageview.setOnClickListener {
-            showBottomSheet()
+            showBottomSheetFragment()
         }
         myviewModel.bitmap.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
-                image_view_avatar.setImageBitmap(bitmap)
+                image_view_avatar.load(bitmap){
+                    transformations(CircleCropTransformation())
+                }
             }
         })
 
         myviewModel.uri.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
-                image_view_avatar.setImageURI(bitmap)
+                image_view_avatar.load(bitmap){
+                    transformations(CircleCropTransformation())
+                }
             }
         })
     }
 
-    fun showBottomSheet() {
+    fun showBottomSheetFragment() {
         val addPhotoBottomDialogFragment =
             ImageResourceChooserDialogFragment.newInstance()
         addPhotoBottomDialogFragment.show(

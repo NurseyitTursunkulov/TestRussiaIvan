@@ -48,4 +48,5 @@ dependencies {
 
     implementation("org.koin:koin-android:2.0.1")
     implementation("org.koin:koin-android-viewmodel:2.0.1")
+    implementation("io.coil-kt:coil:0.9.5")
 }

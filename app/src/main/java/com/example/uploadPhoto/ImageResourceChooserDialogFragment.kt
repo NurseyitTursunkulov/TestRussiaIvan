@@ -49,6 +49,7 @@ class ImageResourceChooserDialogFragment() : RoundedBottomSheetDialogFragment() 
                 }
             }
         }
+        dismiss()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -61,6 +62,7 @@ class ImageResourceChooserDialogFragment() : RoundedBottomSheetDialogFragment() 
             val imageUri = data?.data;
             Log.d("Nurs", "photo geldi uuuuuu")
         }
+        dismiss()
     }
 
     companion object {

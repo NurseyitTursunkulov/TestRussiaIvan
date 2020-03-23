@@ -1,17 +1,17 @@
 package com.example.testrussiaivan
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.viewmodel.ext.android.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
+
     val viewModel: MyViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,12 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        currentFocus?.let {
-            val imm: InputMethodManager = getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            ) as (InputMethodManager)
-            imm.hideSoftInputFromWindow(it.windowToken, 0)
-        }
+        closeKeyboard()
         return super.dispatchTouchEvent(ev)
     }
 

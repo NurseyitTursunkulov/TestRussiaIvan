@@ -15,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
 
-    val myviewModel: MyViewModel by sharedViewModel()
+    private val viewModel: MyViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,7 +26,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         add_avatar_imageview.setOnClickListener {
             showBottomSheetFragment()
         }
-        myviewModel.bitmap.observe(viewLifecycleOwner, Observer {
+        viewModel.bitmap.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
                 image_view_avatar.load(bitmap){
                     transformations(CircleCropTransformation())
@@ -34,7 +34,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
             }
         })
 
-        myviewModel.uri.observe(viewLifecycleOwner, Observer {
+        viewModel.uri.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
                 image_view_avatar.load(bitmap){
                     transformations(CircleCropTransformation())

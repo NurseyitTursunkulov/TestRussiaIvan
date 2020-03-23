@@ -56,7 +56,6 @@ class ImageResourceChooserDialogFragment() : RoundedBottomSheetDialogFragment() 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
-//            image_view_avatar.setImageBitmap(imageBitmap)
             viewModel.bitmap.postValue(Event(imageBitmap))
             Log.d("Nurs", "photo geldi uuuuuu")
         }

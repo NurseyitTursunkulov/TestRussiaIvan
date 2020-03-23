@@ -10,11 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.testrussiaivan.*
-import kotlinx.android.synthetic.main.bottom_sheet.add_image_tv
-import kotlinx.android.synthetic.main.bottom_sheet.add_photo_tv
-import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.android.synthetic.main.bottom_sheet.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ImageResourceChooserDialogFragment() : RoundedBottomSheetDialogFragment() {
+
+    val viewModel: MyViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,10 +57,13 @@ class ImageResourceChooserDialogFragment() : RoundedBottomSheetDialogFragment() 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
 //            image_view_avatar.setImageBitmap(imageBitmap)
+            viewModel.bitmap.postValue(Event(imageBitmap))
             Log.d("Nurs", "photo geldi uuuuuu")
         }
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
-            val imageUri = data?.data;
+            data?.data?.let {
+                viewModel.uri.postValue(Event(it))
+            }
             Log.d("Nurs", "photo geldi uuuuuu")
         }
         dismiss()

@@ -1,22 +1,19 @@
 package com.example.testrussiaivan
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.uploadPhoto.ImageResourceChooserDialogFragment
 import kotlinx.android.synthetic.main.fragment_first.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
+
+    val myviewModel: MyViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,12 +22,19 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         add_avatar_imageview.setOnClickListener {
-//                        checkCameraPermission { dispatchTakePictureIntent() }
-//            checkPickImagePermission{
-//                dispatchGetPictureFromGallery()
-//            }
             showBottomSheet()
         }
+        myviewModel.bitmap.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { bitmap ->
+                image_view_avatar.setImageBitmap(bitmap)
+            }
+        })
+
+        myviewModel.uri.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { bitmap ->
+                image_view_avatar.setImageURI(bitmap)
+            }
+        })
     }
 
     fun showBottomSheet() {

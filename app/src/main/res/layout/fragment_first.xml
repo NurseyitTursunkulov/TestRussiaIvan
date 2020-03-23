@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/image_view_avatar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/add_photo_tv"
         android:layout_width="wrap_content"
         android:layout_height="13dp"
         android:layout_marginTop="62dp"
@@ -143,7 +143,7 @@
         app:layout_constraintEnd_toStartOf="@+id/outlinedButton" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/add_image_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"

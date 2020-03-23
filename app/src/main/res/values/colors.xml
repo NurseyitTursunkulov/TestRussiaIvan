@@ -11,4 +11,5 @@
     <color name="toolbar_title_color">#333333</color>
     <color name="actionbar_title_text">#121111</color>
     <color name="hint_text_color">#8A000000</color>
+    <color name="colorGray">#747474</color>
 </resources>

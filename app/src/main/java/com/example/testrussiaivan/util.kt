@@ -1,6 +1,7 @@
 package com.example.testrussiaivan
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.checkPermission
 import com.example.uploadPhoto.ImageResourceChooserDialogFragment
+import java.text.DateFormat
+import java.util.*
 
 const val REQUEST_IMAGE_CAPTURE = 1
 const val MY_PERMISSIONS_REQUEST_ACCESS_GALLERY = 2
@@ -62,6 +65,30 @@ fun MainActivity.closeKeyboard() {
         ) as (InputMethodManager)
         imm.hideSoftInputFromWindow(it.windowToken, 0)
     }
+}
+
+fun Fragment.chooseDate(onDateChoosen: (date:String) -> Unit) {
+    val calendar = Calendar.getInstance();
+    val datapicker = DatePickerDialog(
+        requireContext(),
+        DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            val cal = Calendar.getInstance()
+            cal[Calendar.YEAR] = year
+            cal[Calendar.MONTH] = month
+            cal[Calendar.DAY_OF_MONTH] = dayOfMonth
+            val dateRepresentation = cal.time
+
+            val dateFormat: DateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT)
+            val dateAsString: String = dateFormat.format(dateRepresentation)
+
+            onDateChoosen(dateAsString)
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+    )
+    datapicker.setTitle("");
+    datapicker.show()
 }
 
 open class Event<out T>(private val content: T) {

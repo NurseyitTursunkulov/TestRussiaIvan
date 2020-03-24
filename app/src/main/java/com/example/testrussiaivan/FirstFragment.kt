@@ -1,6 +1,8 @@
 package com.example.testrussiaivan
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
@@ -17,6 +19,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     private val viewModel: MyViewModel by sharedViewModel()
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -28,7 +31,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         }
         viewModel.bitmap.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
-                image_view_avatar.load(bitmap){
+                image_view_avatar.load(bitmap) {
                     transformations(CircleCropTransformation())
                 }
             }
@@ -36,19 +39,34 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
         viewModel.uri.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
-                image_view_avatar.load(bitmap){
+                image_view_avatar.load(bitmap) {
                     transformations(CircleCropTransformation())
                 }
             }
         })
+
+        viewModel.date.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { date ->
+                filled_exposed_dropdown.setText("${date} ")
+            }
+        })
+
+        filled_exposed_dropdown.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                chooseDate { date ->
+                    viewModel.date.postValue(Event(date))
+                }
+            }
+            return@setOnTouchListener false
+        }
     }
 
     fun showBottomSheetFragment() {
         val addPhotoBottomDialogFragment =
-            ImageResourceChooserDialogFragment.newInstance()
+                ImageResourceChooserDialogFragment.newInstance()
         addPhotoBottomDialogFragment.show(
-            parentFragmentManager,
-            ImageResourceChooserDialogFragment.TAG
+                parentFragmentManager,
+                ImageResourceChooserDialogFragment.TAG
         )
     }
 

@@ -19,7 +19,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     private val viewModel: MyViewModel by sharedViewModel()
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -29,6 +29,33 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         add_avatar_imageview.setOnClickListener {
             showBottomSheetFragment()
         }
+
+        select_birthday_et.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                chooseDate { date ->
+                    viewModel.date.postValue(Event(date))
+                }
+            }
+            return@setOnTouchListener false
+        }
+
+        boy_btn.setOnClickListener {
+            viewModel.sexOfChild.postValue(Event(Sex.BOY))
+        }
+
+        //this button only for view of boy_btn substitution
+        boy_btn_not_selected.setOnClickListener {
+            viewModel.sexOfChild.postValue(Event(Sex.BOY))
+        }
+        girl_btn.setOnClickListener {
+            viewModel.sexOfChild.postValue(Event(Sex.GIRL))
+        }
+
+        //this button only for view of girl_btn substitution
+        girl_btn_selected.setOnClickListener {
+            viewModel.sexOfChild.postValue(Event(Sex.GIRL))
+        }
+
         viewModel.bitmap.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
                 image_view_avatar.load(bitmap) {
@@ -37,7 +64,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
             }
         })
 
-        viewModel.uri.observe(viewLifecycleOwner, Observer {
+        viewModel.galleryImageUri.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { bitmap ->
                 image_view_avatar.load(bitmap) {
                     transformations(CircleCropTransformation())
@@ -47,18 +74,23 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
         viewModel.date.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { date ->
-                filled_exposed_dropdown.setText("${date} ")
+                select_birthday_et.setText("${date} ")
             }
         })
 
-        filled_exposed_dropdown.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                chooseDate { date ->
-                    viewModel.date.postValue(Event(date))
+        viewModel.sexOfChild.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                when (it) {
+                    Sex.GIRL -> {
+                        hightLightOnlyGirlButton()
+                    }
+                    Sex.BOY -> {
+                        hightLightOnlyBoyButton()
+                    }
                 }
             }
-            return@setOnTouchListener false
         }
+        )
     }
 
     fun showBottomSheetFragment() {

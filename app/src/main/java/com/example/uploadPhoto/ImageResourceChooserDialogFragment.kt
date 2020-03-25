@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,13 +56,11 @@ class ImageResourceChooserDialogFragment() : RoundedBottomSheetDialogFragment() 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             viewModel.bitmap.postValue(Event(imageBitmap))
-            Log.d("Nurs", "photo geldi uuuuuu")
         }
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
             data?.data?.let {
-                viewModel.uri.postValue(Event(it))
+                viewModel.galleryImageUri.postValue(Event(it))
             }
-            Log.d("Nurs", "photo geldi uuuuuu")
         }
         dismiss()
     }

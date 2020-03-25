@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/filledTextField">
 
         <AutoCompleteTextView
-            android:id="@+id/filled_exposed_dropdown"
+            android:id="@+id/select_birthday_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
@@ -106,8 +106,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/outlinedButton"
-        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/boy_btn"
+        style="@style/SexButtonSelected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -117,17 +117,30 @@
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:text="Мальчик"
-        android:textAllCaps="false"
-        android:textColor="@color/red"
-        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:strokeColor="@color/red"
         tools:targetApi="lollipop" />
+    <Button
+        android:id="@+id/boy_btn_not_selected"
+        style="@style/SexButtonNotSelected"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:letterSpacing="0"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="Мальчик"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        tools:targetApi="lollipop" />
 
     <Button
-        android:id="@+id/textButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:id="@+id/girl_btn"
+        style="@style/SexButtonNotSelected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
@@ -137,10 +150,23 @@
         android:minHeight="0dp"
         android:text="Девочка"
         android:textAllCaps="false"
-        android:textColor="@color/colorTitle"
-        android:textSize="17sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/outlinedButton"
-        app:layout_constraintEnd_toStartOf="@+id/outlinedButton" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/boy_btn"
+        app:layout_constraintEnd_toStartOf="@+id/boy_btn" />
+
+    <Button
+        android:id="@+id/girl_btn_selected"
+        style="@style/SexButtonSelected"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:letterSpacing="0"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="Девочка"
+        app:layout_constraintBaseline_toBaselineOf="@+id/boy_btn"
+        app:layout_constraintEnd_toStartOf="@+id/boy_btn" />
 
     <TextView
         android:id="@+id/add_image_tv"
@@ -151,7 +177,7 @@
         android:text="Пол"
         android:textColor="@color/sex_tv_color"
         android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textButton"
+        app:layout_constraintBaseline_toBaselineOf="@+id/girl_btn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -168,6 +194,6 @@
         android:text="Сохранить"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textButton" />
+        app:layout_constraintTop_toBottomOf="@+id/girl_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

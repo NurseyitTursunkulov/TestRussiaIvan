@@ -6,12 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.MediaStore
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.fragment.app.Fragment
 import com.example.permissionlib.MY_PERMISSIONS_REQUEST_ACCESS_CAMERA
 import com.example.permissionlib.checkPermission
 import com.example.uploadPhoto.ImageResourceChooserDialogFragment
+import kotlinx.android.synthetic.main.fragment_first.*
 import java.text.DateFormat
 import java.util.*
 
@@ -91,6 +93,20 @@ fun Fragment.chooseDate(onDateChoosen: (date:String) -> Unit) {
     datapicker.show()
 }
 
+fun FirstFragment.hightLightOnlyBoyButton() {
+    boy_btn.visibility = View.VISIBLE
+    boy_btn_not_selected.visibility = View.INVISIBLE
+    girl_btn.visibility = View.VISIBLE
+    girl_btn_selected.visibility = View.INVISIBLE
+}
+
+fun FirstFragment.hightLightOnlyGirlButton() {
+    boy_btn.visibility = View.INVISIBLE
+    boy_btn_not_selected.visibility = View.VISIBLE
+    girl_btn.visibility = View.INVISIBLE
+    girl_btn_selected.visibility = View.VISIBLE
+}
+
 open class Event<out T>(private val content: T) {
 
     var hasBeenHandled = false
@@ -112,4 +128,8 @@ open class Event<out T>(private val content: T) {
      * Returns the content, even if it's already been handled.
      */
     fun peekContent(): T = content
+}
+
+enum class Sex {
+    GIRL, BOY
 }
